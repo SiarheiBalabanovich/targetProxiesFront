@@ -6,13 +6,13 @@ phases:
       nodejs: 18
     commands:
       - echo Installing NPM dependencies...
-      - npm install --force --legacy-peer-deps
+      - npm ci
 
   build:
     commands:
       - echo Build started on `date`
       - npx tsc
-      - vite build
+      - npx vite build
 
   post_build:
     commands:
