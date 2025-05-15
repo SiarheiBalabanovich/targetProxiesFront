@@ -5,12 +5,12 @@ phases:
     runtime-versions:
       nodejs: 18
     commands:
-      - echo Installing dependencies...
-      - npm ci
-      - npm install -g typescript
+      - echo Installing source NPM dependencies...
+      - npm install --force --legacy-peer-deps
+      - npm install typescript --save-dev --force --legacy-peer-deps
   build:
     commands:
-      - echo Build started...
+      - echo Build started on `date`
       - npm run build
 artifacts:
   files:
