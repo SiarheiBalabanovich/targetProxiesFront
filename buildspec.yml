@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    AWS_DEFAULT_REGION: us-east-1 # CloudFront работает в глобальном регионе us-east-1
+    AWS_DEFAULT_REGION: us-east-2
 
 phases:
   install:
@@ -21,11 +21,14 @@ phases:
   post_build:
     commands:
       - echo "Deploy done on `date`"
+      - echo "Syncing dist/ → S3 bucket…"
+      - aws s3 sync dist/ s3://app.targetedproxies-dev.com/ --delete --exclude ".DS_Store"
       - echo "Invalidating CloudFront cache…"
-      - aws cloudfront create-invalidation --distribution-id E248SP1JNJWCHR --paths "/*" --region us-east-1
+      - aws cloudfront create-invalidation \
+        --distribution-id E248SP1JNJWCHR \
+        --paths "/*" \
+        --region us-east-1
       - echo "Invalidation requested."
 
 artifacts:
-  base-directory: dist
-  files:
-    - "**/*"
+  files: []
