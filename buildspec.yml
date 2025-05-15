@@ -5,9 +5,8 @@ phases:
     runtime-versions:
       nodejs: 18
     commands:
-      - echo Installing NPM dependencies cleanly...
-      - npm install
-      - npm install vite --save-dev
+      - echo Installing clean dependencies...
+      - npm ci
 
   build:
     commands:
