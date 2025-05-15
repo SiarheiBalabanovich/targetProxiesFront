@@ -5,9 +5,8 @@ phases:
     runtime-versions:
       nodejs: 18
     commands:
-      - echo "Сброс NODE_ENV, чтобы установить devDependencies"
+      - echo "Installing deps (incl. devDependencies)..."
       - export NODE_ENV=
-      - echo "Устанавливаем все зависимости"
       - npm ci --legacy-peer-deps
 
   build:
@@ -17,7 +16,10 @@ phases:
 
   post_build:
     commands:
-      - echo "Done on `date`"
+      - echo "Deploy done on `date`"
+      - echo "Invalidating CloudFront cache..."
+      - aws cloudfront create-invalidation --distribution-id E248SP1JNJWCHR --paths "/*"
+      - echo "Invalidation requested."
 
 artifacts:
   base-directory: dist
