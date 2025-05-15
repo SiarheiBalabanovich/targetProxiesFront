@@ -1,5 +1,9 @@
 version: 0.2
 
+env:
+  variables:
+    AWS_DEFAULT_REGION: us-east-1 # ← CloudFront работает в глобальном регионе us-east-1
+
 phases:
   install:
     runtime-versions:
@@ -18,7 +22,10 @@ phases:
     commands:
       - echo "Deploy done on `date`"
       - echo "Invalidating CloudFront cache..."
-      - aws cloudfront create-invalidation --distribution-id E248SP1JNJWCHR --paths "/*"
+      - aws cloudfront create-invalidation \
+        --distribution-id E248SP1JNJWCHR \
+        --paths "/*" \
+        --region us-east-1
       - echo "Invalidation requested."
 
 artifacts:
