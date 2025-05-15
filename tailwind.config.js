@@ -1,0 +1,126 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  darkMode: ["class"],
+  content: [
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
+  ],
+  prefix: "",
+  theme: {
+    extend: {},
+    screens: {
+      'max-1750': {'max': '1750px'},
+      'max-1700': {'max': '1700px'},
+      'max-1650': {'max': '1650px'},
+      'max-1600': {'max': '1600px'},
+      'max-1500': {'max': '1500px'},
+      'max-1450': {'max': '1450px'},
+      'max-1400': {'max': '1400px'},
+      'max-1350': {'max': '1350px'},
+      'max-1300': {'max': '1300px'},
+      'max-tablet': {'max': '1280px'},
+      'min-tablet': {'min': '1279px'},
+      'max-1250': {'max': '1250px'},
+      'max-1200': {'max': '1200px'},
+      'max-1024': {'max': '1024px'},
+      'max-mobile-1': {'max': '991px'},
+      'min-mobile-1': {'min': '990px'},
+      'max-mobile-2': {'max': '768px'},
+      'min-mobile-2': {'min': '767px'},
+      'max-mobile-4': {'max': '480px'},
+      'min-mobile-4': {'min': '479px'},
+      'max-mobile-3': {'max': '360px'},
+      'min-mobile-3': {'min': '359px'},
+    },
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
+    extend: {
+      colors: {
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
+      backgroundImage: {
+        'custom-gradient': 'linear-gradient(180deg, rgba(0, 117, 255, 0.08) 1%, rgba(39, 148, 175, 0.02) 100%)',
+        'custom-gradient-2': 'linear-gradient(98deg, #00A2CA 6.73%, #1F86FF 96.72%)',
+        'custom-gradient-3': 'linear-gradient(180deg, #0E1626 1%, #0F1118 100%)',
+        'custom-gradient-4': 'linear-gradient(270deg, #0E1017 1%, rgba(0, 8, 17, 0.01) 100%)',
+        'custom-gradient-5': 'linear-gradient(270deg, rgba(255, 255, 255, 0.00) 1%, rgba(177, 222, 255, 0.26) 52.58%, rgba(255, 255, 255, 0.00) 100%)',
+        'custom-gradient-6': 'linear-gradient(180deg, rgba(0, 117, 255, 0.06) 1%, rgba(39, 148, 175, 0.02) 100%)',
+        'custom-gradient-7': 'linear-gradient(266deg, rgba(0, 133, 255, 0.60) -8.68%, rgba(39, 85, 175, 0.17) 122.17%)',
+        'custom-gradient-8': 'linear-gradient(85deg, #001226 -11.06%, rgba(0, 67, 116, 0.94) 53.53%, #002652 120.16%)',
+        'custom-gradient-9': 'linear-gradient(180deg, rgba(0, 204, 255, 0.08) 1%, rgba(39, 148, 175, 0.02) 100%)',
+        'custom-gradient-10': 'linear-gradient(98deg, rgba(0, 204, 255, 0.13) 6.73%, rgba(31, 134, 255, 0.13) 96.72%)',
+        'custom-gradient-11': 'linear-gradient(180deg, rgba(13, 22, 38, 0.68) 1%, rgba(15, 17, 24, 0.68) 100%)',
+        'custom-gradient-12': 'linear-gradient(90deg, #080D21 2.53%, #0A3359 207.55%)',
+        'custom-gradient-13': 'linear-gradient(234deg, #7B23EA 29.59%, #7371E2 66.43%)',
+        'custom-gradient-14': 'linear-gradient(309deg, #1A58F7 29.14%, #3083FF 66.9%)',
+        'custom-gradient-15': 'linear-gradient(168deg, #009EF6 38.15%, #E6F4FF 98.68%)',
+        'custom-gradient-16': 'linear-gradient(98deg, #005A71 6.73%, #003675 96.72%)',
+      },
+      boxShadow: {
+        'custom': '0px 1px 15.2px 0px rgba(4, 16, 31, 0.15)',
+        'custom-2': '0px 4px 9.3px 0px rgba(28, 33, 37, 0.19)',
+        'custom-3': '0px 1px 15.2px 0px rgba(4, 16, 31, 0.15)',
+        'custom-4': '0px 1px 35.2px 0px rgba(65, 81, 100, 0.11)',
+      },
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+      },
+    },
+  },
+  plugins: [require("tailwindcss-animate")],
+}
