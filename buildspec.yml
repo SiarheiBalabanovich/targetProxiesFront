@@ -5,11 +5,13 @@ phases:
     runtime-versions:
       nodejs: 18
     commands:
+      - echo Installing dependencies...
       - npm ci
+      - npm install -g typescript
   build:
     commands:
+      - echo Build started...
       - npm run build
-
 artifacts:
   files:
     - "**/*"
