@@ -5,8 +5,8 @@ phases:
     runtime-versions:
       nodejs: 18
     commands:
-      - echo Installing clean dependencies...
-      - npm ci
+      - echo Installing dependencies...
+      - npm install
 
   build:
     commands:
