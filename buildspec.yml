@@ -7,12 +7,12 @@ phases:
     commands:
       - echo Installing NPM dependencies...
       - npm install --force --legacy-peer-deps
-      - npm install --save-dev typescript --force --legacy-peer-deps
 
   build:
     commands:
       - echo Build started on `date`
-      - npm run build
+      - npx tsc
+      - vite build
 
   post_build:
     commands:
