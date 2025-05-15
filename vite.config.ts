@@ -25,7 +25,7 @@ export default defineConfig({
     },
     outDir: "dist",
     assetsDir: "assets",
-    minify: false, // временно отключите минификацию для отладки
+    minify: false,
     emptyOutDir: true,
   },
   optimizeDeps: {

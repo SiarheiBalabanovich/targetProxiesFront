@@ -5,22 +5,21 @@ phases:
     runtime-versions:
       nodejs: 18
     commands:
-      - echo Installing dependencies...
-      - npm install --force --legacy-peer-deps
-      - echo Manually reinstalling TypeScript to fix bin path
-      - npm install typescript --save-dev --force
+      - echo "Сброс NODE_ENV, чтобы установить devDependencies"
+      - export NODE_ENV=
+      - echo "Устанавливаем все зависимости"
+      - npm ci --legacy-peer-deps
 
   build:
     commands:
-      - echo Build started on `date`
-      - ./node_modules/.bin/tsc
-      - npm run build:vite
+      - echo "Building..."
+      - npm run build
 
   post_build:
     commands:
-      - echo Build completed on `date`
+      - echo "Done on `date`"
 
 artifacts:
+  base-directory: dist
   files:
     - "**/*"
-  base-directory: dist
