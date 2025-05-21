@@ -753,13 +753,20 @@ const Registration: React.FC = () => {
                       >
                         back
                       </Button>
-                      <Button
+                      {/* <Button
                         disabled={!isValid}
                         type="submit"
                         onClick={handleNext}
                         className="w-full"
                       >
                         Create Account
+                      </Button> */}
+                      <Button
+                      type="submit"
+                      disabled={!isValid || !recaptchaValue}
+                      className="w-full"
+                      >
+                      Create Account
                       </Button>
                     </div>
                   </div>
