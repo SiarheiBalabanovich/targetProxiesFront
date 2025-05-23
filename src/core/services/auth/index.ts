@@ -86,6 +86,60 @@ export const googleAuth = async (): Promise<string> => {
   return response.data as string;
 };
 
+// export const createUser = async (
+//   firstName: string,
+//   lastName: string,
+//   email: string,
+//   password: string,
+//   survey: string,
+//   surveyDetail: string | undefined,
+//   phoneNumber: string,
+//   city: string,
+//   country: string,
+//   recaptchaToken: string | null,
+// ): Promise<string> => {
+//   try {
+    // const url = `${API_BASE_URL}/users/create?recaptcha_token=${recaptchaToken || ""}`;
+    // const url  = `${API_BASE_URL}/users/create`;
+//     const url  = `${API_BASE_URL}/users/users/create`;
+
+
+//     const data = {
+//       first_name: firstName,
+//       last_name: lastName,
+//       email,
+//       password,
+//       survey,
+//       survey_detail: surveyDetail,
+//       phone_number: phoneNumber,
+//       city,
+//       country,
+//       recaptcha_token: recaptchaToken,
+//     };
+
+//     const response = await axios.post(url, data, {
+//       headers: {
+//         Accept: "application/json",
+//         "Content-Type": "application/json",
+//       },
+//     });
+
+//     return response.data as string;
+//   } catch (error) {
+//     if (axios.isAxiosError(error)) {
+//       const serverError = error.response?.data;
+//       if (
+//         serverError &&
+//         serverError.error === "User with this email already exists"
+//       ) {
+//         return "User with this email already exists";
+//       }
+//     }
+//     console.error("An error occurred during user creation:", error);
+//     throw error;
+//   }
+// };
+
 export const createUser = async (
   firstName: string,
   lastName: string,
@@ -99,25 +153,24 @@ export const createUser = async (
   recaptchaToken: string | null,
 ): Promise<string> => {
   try {
-    // const url = `${API_BASE_URL}/users/create?recaptcha_token=${recaptchaToken || ""}`;
-    // const url  = `${API_BASE_URL}/users/create`;
-    const url  = `${API_BASE_URL}/users/users/create`;
-
-
-    const data = {
+    
+    const params = new URLSearchParams({
       first_name: firstName,
       last_name: lastName,
       email,
       password,
       survey,
-      survey_detail: surveyDetail,
+      survey_detail: surveyDetail || "",
       phone_number: phoneNumber,
       city,
       country,
-      recaptcha_token: recaptchaToken,
-    };
+      recaptcha_token: recaptchaToken || "",
+    });
 
-    const response = await axios.post(url, data, {
+    const url = `${API_BASE_URL}/users/users/create?${params.toString()}`;
+
+    // POST без body (или с null)
+    const response = await axios.post(url, null, {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -139,6 +192,7 @@ export const createUser = async (
     throw error;
   }
 };
+
 
 
 export const recoverUpdate = async (
