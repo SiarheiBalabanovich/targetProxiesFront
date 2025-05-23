@@ -99,7 +99,8 @@ export const createUser = async (
   recaptchaToken: string | null,
 ): Promise<string> => {
   try {
-    const url = `${API_BASE_URL}/users/create?recaptcha_token=${recaptchaToken || ""}`;
+    // const url = `${API_BASE_URL}/users/create?recaptcha_token=${recaptchaToken || ""}`;
+    const url  = `${API_BASE_URL}/users/create`;
 
     const data = {
       first_name: firstName,
@@ -111,6 +112,7 @@ export const createUser = async (
       phone_number: phoneNumber,
       city,
       country,
+      recaptcha_token: recaptchaToken,
     };
 
     const response = await axios.post(url, data, {
