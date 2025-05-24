@@ -288,14 +288,14 @@ import { userInfo } from "src/core/models/interfaces";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL as string;
 
-// Получить токен авторизации
+
 export const getAuthToken = async (
   email: string,
   password: string,
   rememberMe?: boolean,
 ): Promise<string> => {
   const params = new URLSearchParams();
-  params.append("email", email);
+  params.append("username", email);
   params.append("password", password);
 
   const response = await axios.post(
@@ -318,7 +318,7 @@ export const getAuthToken = async (
   return Promise.reject("An error occurred");
 };
 
-// Проверка пароля
+
 export const checkPassword = async (password: string) => {
   const token = localStorage.getItem("authToken");
   if (token !== null) {
@@ -338,7 +338,7 @@ export const checkPassword = async (password: string) => {
   return false;
 };
 
-// Восстановление пароля (отправить ссылку)
+
 export const postRecoveryPassword = async (email: string) => {
   const response = await axios.post(
     `${API_BASE_URL}/password/recover/sendLink?email=${email}`,
@@ -353,7 +353,7 @@ export const postRecoveryPassword = async (email: string) => {
   return response.data as string;
 };
 
-// Получить информацию о пользователе
+
 export const getUserInfo = async (token: string): Promise<userInfo> => {
   const response = await axios.get(`${API_BASE_URL}/users/detail/token`, {
     headers: {
@@ -365,7 +365,7 @@ export const getUserInfo = async (token: string): Promise<userInfo> => {
   return response.data as userInfo;
 };
 
-// Google auth
+
 export const googleAuth = async (): Promise<string> => {
   const response = await axios.get(`${API_BASE_URL}/auth/google-login`, {
     headers: {
@@ -376,8 +376,7 @@ export const googleAuth = async (): Promise<string> => {
   return response.data as string;
 };
 
-// --- ВАЖНО ---
-// Регистрировать пользователя — только через JSON body!
+
 export const createUser = async (
   firstName: string,
   lastName: string,
@@ -429,7 +428,7 @@ export const createUser = async (
   }
 };
 
-// Обновить пароль (recovery)
+
 export const recoverUpdate = async (
   query: string,
   password: string,
@@ -463,7 +462,7 @@ export const recoverUpdate = async (
   }
 };
 
-// Отправить код на почту для регистрации
+
 export const emailSend = async (email: string): Promise<string> => {
   try {
     const response = await axios.get(
@@ -492,7 +491,7 @@ export const emailSend = async (email: string): Promise<string> => {
   }
 };
 
-// Подтвердить почту через код
+
 export const emailVerify = async (
   email: string,
   otp: string,
