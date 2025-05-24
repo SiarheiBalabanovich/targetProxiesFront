@@ -295,7 +295,7 @@ export const getAuthToken = async (
   rememberMe?: boolean,
 ): Promise<string> => {
   const params = new URLSearchParams();
-  params.append("username", email);
+  params.append("email", email);
   params.append("password", password);
 
   const response = await axios.post(
