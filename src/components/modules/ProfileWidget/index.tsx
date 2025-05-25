@@ -48,11 +48,11 @@ const ProfileWidget: React.FC<ProfileWidgetProps> = (admin) => {
           setHasSubscription(subs.total > 0);
           setIsLoading(false);
         } catch (error) {
-          localStorage.removeItem("authToken");
+          // localStorage.removeItem("authToken");
           window.location.href = "/login";
         }
       } else {
-        localStorage.removeItem("authToken");
+        // localStorage.removeItem("authToken");
         window.location.href = "/login";
       }
     })();
