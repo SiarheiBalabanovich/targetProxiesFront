@@ -354,17 +354,6 @@ export const postRecoveryPassword = async (email: string) => {
 };
 
 
-// export const getUserInfo = async (token: string): Promise<userInfo> => {
-//   const response = await axios.get(`${API_BASE_URL}/users/users/detail/token`, {
-//     headers: {
-//       Accept: "application/json",
-//       Authorization: `Bearer ${token}`,
-//     },
-//   });
-
-//   return response.data as userInfo;
-// };
-
 export const getUserInfo = async (token: string): Promise<userInfo> => {
   const response = await axios.get(`${API_BASE_URL}/users/detail/token`, {
     headers: {
@@ -375,7 +364,6 @@ export const getUserInfo = async (token: string): Promise<userInfo> => {
 
   return response.data as userInfo;
 };
-
 
 
 export const googleAuth = async (): Promise<string> => {
