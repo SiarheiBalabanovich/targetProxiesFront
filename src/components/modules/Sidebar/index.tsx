@@ -260,7 +260,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeMenu, admin }) => {
                 <Link
                   to={"/login"}
                   onClick={() => {
-                    localStorage.removeItem("authToken");
+                    // localStorage.removeItem("authToken");
                   }}
                   className="min-w-[210px] flex items-center gap-3 p-3 rounded-[4px] text-[#9B9A9D]"
                 >

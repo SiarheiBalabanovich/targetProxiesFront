@@ -21,7 +21,7 @@ export const UserBalance = () => {
 
       if (token) {
         try {
-          setUserBalance(await getBalanceInfo(token));
+          // setUserBalance(await getBalanceInfo(token));
           setIsLoading(false);
         } catch (error) {
           console.log("setUserBalance - Error");

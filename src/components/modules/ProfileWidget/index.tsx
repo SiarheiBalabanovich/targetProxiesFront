@@ -43,7 +43,7 @@ const ProfileWidget: React.FC<ProfileWidgetProps> = (admin) => {
         try {
           const userInfo = await getUserInfo(token);
           dispatch(setStoreUserInfo(userInfo));
-          setUserBalance(await getBalanceInfo(token));
+          // setUserBalance(await getBalanceInfo(token));
           const subs = await getActiveSubscription(token, userInfo.id, 0, 1);
           setHasSubscription(subs.total > 0);
           setIsLoading(false);
