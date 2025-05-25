@@ -12,7 +12,7 @@ export const authRedirect = async (): Promise<void> => {
         window.location.href = "/admin";
       }
     } catch {
-      // localStorage.removeItem("authToken");
+      localStorage.removeItem("authToken");
     }
   }
 };
