@@ -15,7 +15,7 @@ export const createProxyBuy = async (
 ): Promise<string> => {
   const token = localStorage.getItem("authToken");
   const response = await axios.post(
-    `${API_BASE_URL}/create-checkout-session?proxy=${proxy}&duration=${duration}&duration_count=${durationCount}&payment_method=${paymentMethod}&price=${price}&quantity=${quantity}&auto_extended=${autoExtended}${discount !== undefined ? `&discount=${discount}` : ""}&location=${location}`,
+    `${API_BASE_URL}/proxy/create-checkout-session?proxy=${proxy}&duration=${duration}&duration_count=${durationCount}&payment_method=${paymentMethod}&price=${price}&quantity=${quantity}&auto_extended=${autoExtended}${discount !== undefined ? `&discount=${discount}` : ""}&location=${location}`,
     null,
     {
       headers: {
@@ -42,7 +42,7 @@ export const createProxyBuyCrypto = async (
 ): Promise<string> => {
   const token = localStorage.getItem("authToken");
   const response = await axios.post(
-    `${API_BASE_URL}/create-crypto-checkout-session?proxy=${proxy}&duration=${duration}&duration_count=${durationCount}&payment_method=${paymentMethod}&price=${price}&quantity=${quantity}&auto_extended=${autoExtended}${discount !== undefined ? `&discount=${discount}` : ""}&location=${location}`,
+    `${API_BASE_URL}/crypto/create-crypto-checkout-session?proxy=${proxy}&duration=${duration}&duration_count=${durationCount}&payment_method=${paymentMethod}&price=${price}&quantity=${quantity}&auto_extended=${autoExtended}${discount !== undefined ? `&discount=${discount}` : ""}&location=${location}`,
     null,
     {
       headers: {
@@ -69,7 +69,7 @@ export const createProxyBuyCryptoCloud = async (
 ): Promise<string> => {
   const token = localStorage.getItem("authToken");
   const response = await axios.post(
-    `${API_BASE_URL}/create-crypto-cloud-checkout-session?proxy=${proxy}&duration=${duration}&duration_count=${durationCount}&payment_method=${paymentMethod}&price=${price}&quantity=${quantity}&auto_extended=${autoExtended}${discount !== undefined ? `&discount=${discount}` : ""}&location=${location}`,
+    `${API_BASE_URL}/crypto/create-crypto-cloud-checkout-session?proxy=${proxy}&duration=${duration}&duration_count=${durationCount}&payment_method=${paymentMethod}&price=${price}&quantity=${quantity}&auto_extended=${autoExtended}${discount !== undefined ? `&discount=${discount}` : ""}&location=${location}`,
     null,
     {
       headers: {
