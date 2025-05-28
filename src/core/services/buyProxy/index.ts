@@ -15,7 +15,7 @@ export const createProxyBuy = async (
 ): Promise<string> => {
   const token = localStorage.getItem("authToken");
   const response = await axios.post(
-    `${API_BASE_URL}/crypto/create-checkout-session?proxy=${proxy}&duration=${duration}&duration_count=${durationCount}&payment_method=${paymentMethod}&price=${price}&quantity=${quantity}&auto_extended=${autoExtended}${discount !== undefined ? `&discount=${discount}` : ""}&location=${location}`,
+    `${API_BASE_URL}/payment/create-checkout-session?proxy=${proxy}&duration=${duration}&duration_count=${durationCount}&payment_method=${paymentMethod}&price=${price}&quantity=${quantity}&auto_extended=${autoExtended}${discount !== undefined ? `&discount=${discount}` : ""}&location=${location}`,
     null,
     {
       headers: {
