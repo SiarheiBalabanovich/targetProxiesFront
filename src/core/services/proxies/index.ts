@@ -10,7 +10,7 @@ export const getProxies = async (
   limit?: number,
 ): Promise<proxiesList> => {
   const response = await axios.get(
-    `${API_BASE_URL}/proxies/customer/list?offset=${offset}&limit=${limit ? limit : "10"}`,
+    `${API_BASE_URL}/proxy/customer/list?offset=${offset}&limit=${limit ? limit : "10"}`,
     {
       headers: {
         Accept: "application/json",
