@@ -10,7 +10,7 @@ export const getNotifies = async (
 ): Promise<notifiesListProps | null> => {
   try {
     const response = await axios.get(
-      `${API_BASE_URL}/notify?offset=0${limit !== false ? "&limit=1000" : "&limit=1000"}&is_read=false`,
+      `${API_BASE_URL}/notify/notifies?offset=0${limit !== false ? "&limit=1000" : "&limit=1000"}&is_read=false`,
       {
         headers: {
           Accept: "application/json",
@@ -39,7 +39,7 @@ export const updateNotifies = async (
   id: number,
 ): Promise<defaultResponse> => {
   const response = await axios.patch(
-    `${API_BASE_URL}/notify/update/?notify_id=${id}`,
+    `${API_BASE_URL}/notify/notifies/update/?notify_id=${id}`,
     null,
     {
       headers: {
