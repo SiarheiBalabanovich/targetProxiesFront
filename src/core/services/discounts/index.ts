@@ -7,7 +7,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL as string;
 export const discountsList = async (
   token: string,
 ): Promise<discountListItem[]> => {
-  const response = await axios.get(`${API_BASE_URL}/discounts`, {
+  const response = await axios.get(`${API_BASE_URL}/discount/`, {
     headers: {
       Accept: "application/json",
       Authorization: `Bearer ${token}`,
@@ -35,7 +35,7 @@ export const discountApply = async (
   code: string,
 ): Promise<discountListItem | string> => {
   const response = await axios.get(
-    `${API_BASE_URL}/discounts/apply?code=${code}`,
+    `${API_BASE_URL}/discount/apply?code=${code}`,
     {
       headers: {
         Accept: "application/json",
@@ -92,7 +92,7 @@ export const createDiscount = async (
   };
 
   const response = await axios.post(
-    `${API_BASE_URL}/discount`,
+    `${API_BASE_URL}/discount/`,
     payload,
     {
       headers: {
