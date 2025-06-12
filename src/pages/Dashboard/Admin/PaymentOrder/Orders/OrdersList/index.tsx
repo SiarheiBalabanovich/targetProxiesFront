@@ -222,7 +222,7 @@ const AdminOrdersList: React.FC = () => {
                             <SelectItem value="mastercard">
                               <MasterCardIcon />
                             </SelectItem>
-                            <SelectItem value="crypto">CRYPTO</SelectItem>
+                            {/* <SelectItem value="crypto">CRYPTO</SelectItem> */}
                           </SelectGroup>
                         </SelectContent>
                       </Select>

@@ -902,7 +902,7 @@ export const AddProxy: React.FC = () => {
                                 </div>
                               </Label>
                               <div className="w-full h-px bg-custom-gradient-5 rounded-[3px]" />
-                              <Label className="w-full h-full justify-start items-center gap-5 flex">
+                              {/* <Label className="w-full h-full justify-start items-center gap-5 flex">
                                 <RadioGroupItem
                                   className="min-w-6"
                                   value="Crypto"
@@ -913,7 +913,7 @@ export const AddProxy: React.FC = () => {
                                     <Crypto2Icon className="w-[18px] h-[18px]" />
                                   </div>
                                 </div>
-                              </Label>
+                              </Label> */}
                               <div className="w-full h-px bg-custom-gradient-5 rounded-[3px]" />
                               <Label className="w-full h-full justify-start items-center gap-5 flex">
                                 <RadioGroupItem
