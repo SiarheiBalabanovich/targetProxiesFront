@@ -11,7 +11,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL as string;
 export const getAllCustomersStats = async (
   token: string,
 ): Promise<allCustomersStats> => {
-  const response = await axios.get(`${API_BASE_URL}/adminPanel/stats`, {
+  const response = await axios.get(`${API_BASE_URL}/api/adminPanel/stats`, {
     headers: {
       Accept: "application/json",
       Authorization: `Bearer ${token}`,
@@ -27,7 +27,7 @@ export const getCustomersList = async (
   limit?: number,
 ): Promise<responseCustomersList> => {
   const response = await axios.get(
-    `${API_BASE_URL}/users/list?offset=0&limit=10&offset=${offset}&limit=${limit ? limit : "10"}`,
+    `${API_BASE_URL}/api/users/list?offset=${offset}&limit=${limit ? limit : "10"}`,
     {
       headers: {
         Accept: "application/json",
@@ -43,7 +43,7 @@ export const deleteCustomer = async (
   token: string,
   id: number,
 ): Promise<defaultResponse> => {
-  const response = await axios.delete(`${API_BASE_URL}/users/delete/${id}`, {
+  const response = await axios.delete(`${API_BASE_URL}/api/users/delete/${id}`, {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/x-www-form-urlencoded",
