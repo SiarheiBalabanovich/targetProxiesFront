@@ -355,7 +355,7 @@ export const postRecoveryPassword = async (email: string) => {
 
 
 export const getUserInfo = async (token: string): Promise<userInfo> => {
-  const response = await axios.get(`${API_BASE_URL}api/users/detail/token`, {
+  const response = await axios.get(`${API_BASE_URL}/users/detail/token`, {
     headers: {
       Accept: "application/json",
       Authorization: `Bearer ${token}`,
