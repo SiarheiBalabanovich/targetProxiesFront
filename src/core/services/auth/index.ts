@@ -390,7 +390,7 @@ export const createUser = async (
   recaptchaToken: string | null,
 ): Promise<string> => {
   try {
-    const url = `${API_BASE_URL}/api/users/create`;
+    const url = `${API_BASE_URL}/users/create`;
 
     const data = {
       first_name: firstName,
