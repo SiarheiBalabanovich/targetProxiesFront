@@ -11,7 +11,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL as string;
 export const getAllCustomersStats = async (
   token: string,
 ): Promise<allCustomersStats> => {
-  const response = await axios.get(`${API_BASE_URL}/api/adminPanel/stats`, {
+  const response = await axios.get(`${API_BASE_URL}/adminPanel/stats`, {
     headers: {
       Accept: "application/json",
       Authorization: `Bearer ${token}`,
