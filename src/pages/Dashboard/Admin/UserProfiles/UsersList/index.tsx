@@ -91,7 +91,7 @@ const AdminUserProfilesList: React.FC = () => {
     formState: { errors: errors, isValid },
     reset: reset,
   } = form;
-  const [searchQuery, setSearchQuery] = useState(""); // Добавлено состояние для поискового запроса
+  const [searchQuery, setSearchQuery] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalIsAddUserOpen, setModalIsAddUserOpen] = useState(false);
   const [customersStats, setCustomersStats] = useState<allCustomersStats>(
@@ -175,23 +175,41 @@ const AdminUserProfilesList: React.FC = () => {
     }
   };
 
-  useEffect(() => {
-    (async () => {
-      const token = localStorage.getItem("authToken");
+  // useEffect(() => {
+  //   (async () => {
+  //     const token = localStorage.getItem("authToken");
 
-      if (token) {
-        setCustomersStats(await getAllCustomersStats(token));
-        setCustomersList(
-          await getCustomersList(
-            token,
-            (currentPage - 1) * itemsPerPage,
-            itemsPerPage,
-          ),
-        );
-        setIsLoading(false);
-      }
-    })();
-  }, [currentPage]);
+  //     if (token) {
+  //       setCustomersStats(await getAllCustomersStats(token));
+  //       setCustomersList(
+  //         await getCustomersList(
+  //           token,
+  //           (currentPage - 1) * itemsPerPage,
+  //           itemsPerPage,
+  //         ),
+  //       );
+  //       setIsLoading(false);
+  //     }
+  //   })();
+  // }, [currentPage]);
+  useEffect(() => {
+  (async () => {
+    const token = localStorage.getItem("authToken");
+
+    if (token) {
+      setCustomersStats(await getAllCustomersStats(token));
+      const list = await getCustomersList(
+        token,
+        (currentPage - 1) * itemsPerPage,
+        itemsPerPage,
+      );
+      console.log("==> Получен список пользователей:", list);
+      setCustomersList(list);
+      setIsLoading(false);
+    }
+  })();
+}, [currentPage]);
+
 
   const customersReverse = (): void => {
     setCustomersList((prevState) => {
