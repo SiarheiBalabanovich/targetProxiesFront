@@ -331,38 +331,40 @@ export const AddProxy: React.FC = () => {
   };
 
   const handleCouponCode = async (couponCode: string) => {
-    await discountApply(couponCode)
-      .then((data) => {
-        if (typeof data !== "string") {
-          setDiscount(data);
+  const token = localStorage.getItem("authToken");
+  await discountApply(couponCode, token)
+    .then((data) => {
+      if (typeof data !== "string") {
+        setDiscount(data);
 
-          let newPrice = priceWithoutDiscount;
-          if (data.type === "fixed") {
-            newPrice -= data.discount_amount;
-          } else if (data.type === "percent") {
-            newPrice -= (newPrice * data.discount_amount) / 100;
-          }
-
-          if (newPrice < data.order_amount) {
-            setCouponRegistrationError(
-              `${couponCode} - Discount is not applicable for this order - minimum order amount is $${data.order_amount}`,
-            );
-            setDiscount(null);
-          } else {
-            setCouponRegistrationError("");
-            setCouponCodeModal(false);
-            setPrice(newPrice);
-          }
+        let newPrice = priceWithoutDiscount;
+        if (data.type === "fixed") {
+          newPrice -= data.discount_amount;
+        } else if (data.type === "percent") {
+          newPrice -= (newPrice * data.discount_amount) / 100;
         }
-      })
-      .catch((error) => {
-        if (error.response.data.detail) {
-          setCouponRegistrationError(error.response.data.detail);
+
+        if (newPrice < data.order_amount) {
+          setCouponRegistrationError(
+            `${couponCode} - Discount is not applicable for this order - minimum order amount is $${data.order_amount}`,
+          );
+          setDiscount(null);
         } else {
-          setCouponRegistrationError(null);
+          setCouponRegistrationError("");
+          setCouponCodeModal(false);
+          setPrice(newPrice);
         }
-      });
-  };
+      }
+    })
+    .catch((error) => {
+      if (error.response.data.detail) {
+        setCouponRegistrationError(error.response.data.detail);
+      } else {
+        setCouponRegistrationError(null);
+      }
+    });
+};
+
 
   const removeDiscount = () => {
     setDiscount(null);
