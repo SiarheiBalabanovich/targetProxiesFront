@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { useAppDispatch } from "src/hooks/useAppDispatch";
 import { AppState } from "src/store/store";
 import { closeModal, openModal } from "src/store/actions/modalActions";
-
 import { Modal } from "src/components/base/modal";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "ui/tabs.tsx";
 import { logoV1 } from "src/assets/images/icons/img-ui.ts";
@@ -223,20 +222,17 @@ export const AddProxy: React.FC = () => {
     const cookieLocation = getCookie("trgx_selectedLocation"); // "minnesota" / "illinois/missouri" (URLencoded?)
     const cookiePlan = getCookie("trgx_selectedPlan"); // "monthly" / "weekly" / "24-hours"?
 
-    // Преобразуем план к формату "Day" / "Week" / "Month"
+    // "Day" / "Week" / "Month"
     let durationValue = "";
     if (cookiePlan === "monthly") durationValue = "Month";
     if (cookiePlan === "weekly") durationValue = "Week";
     if (cookiePlan === "24-hours") durationValue = "Day";
 
-    // Раскодируем локацию
     let decodedLoc = cookieLocation ? decodeURIComponent(cookieLocation) : "";
-    // Пример: превращаем "illinois/missouri" -> "Illinois/Missouri"
     if (decodedLoc.toLowerCase() === "illinois/missouri") {
       decodedLoc = "Illinois/Missouri";
     }
 
-    // Если хоть что-то не пустое
     if (cookieCarrier || decodedLoc || durationValue) {
       reset({
         proxy: cookieCarrier || "",
@@ -248,13 +244,11 @@ export const AddProxy: React.FC = () => {
     }
   }, [reset]);
 
-  // При изменении proxy/location/duration — пишем обратно в куки
   useEffect(() => {
     if (selectedProxy) {
       setCookie("trgx_selectedCarrier", selectedProxy);
     }
     if (selectedLocation) {
-      // Можно привести к нижнему регистру, если нужно
       setCookie("trgx_selectedLocation", selectedLocation);
     }
     // duration -> plan
@@ -280,7 +274,7 @@ export const AddProxy: React.FC = () => {
         if (discount) {
           if (discount.type === "fixed") {
             newPrice -= discount.discount_amount;
-          } else if (discount.type === "percentage") {
+          } else if (discount.type === "percent") {
             newPrice -= (newPrice * discount.discount_amount) / 100;
           }
 
@@ -298,7 +292,6 @@ export const AddProxy: React.FC = () => {
     return () => subscription.unsubscribe();
   }, [watch, discount]);
 
-  // Пересчет цены/скидки при смене любых полей
   useEffect(() => {
     const newPrice = calculatePrice(selectedDuration, selectedQuantity);
     setPriceWithoutDiscount(newPrice);
@@ -307,7 +300,7 @@ export const AddProxy: React.FC = () => {
     if (discount) {
       if (discount.type === "fixed") {
         finalPrice -= discount.discount_amount;
-      } else if (discount.type === "percentage") {
+      } else if (discount.type === "percent") {
         finalPrice -= (finalPrice * discount.discount_amount) / 100;
       }
       if (finalPrice < discount.order_amount) {
@@ -332,7 +325,11 @@ export const AddProxy: React.FC = () => {
 
   const handleCouponCode = async (couponCode: string) => {
   const token = localStorage.getItem("authToken");
-  await discountApply(couponCode)
+  if (!token) {
+    setCouponRegistrationError("Please log in to use coupon codes.");
+    return;
+  }
+  await discountApply(couponCode, token)
     .then((data) => {
       if (typeof data !== "string") {
         setDiscount(data);
@@ -357,14 +354,13 @@ export const AddProxy: React.FC = () => {
       }
     })
     .catch((error) => {
-      if (error.response.data.detail) {
+      if (error?.response?.data?.detail) {
         setCouponRegistrationError(error.response.data.detail);
       } else {
-        setCouponRegistrationError(null);
+        setCouponRegistrationError("Something went wrong");
       }
     });
 };
-
 
   const removeDiscount = () => {
     setDiscount(null);
@@ -585,15 +581,15 @@ export const AddProxy: React.FC = () => {
                                 (country) => {
                                   switch (selectedProxy) {
                                     case "ATT":
-                                      return country.code !== "Minnesota"; // Исключить "Minnesota" для AT&T
+                                      return country.code !== "Minnesota";
                                     case "T-MOBILE":
                                       return (
                                         country.code !== "Illinois/Missouri"
-                                      ); // Исключить "Illinois/Missouri" для T-Mobile
+                                      );
                                     case "Verizon":
-                                      return country.code === "Minnesota"; // Оставить только "Minnesota" для Verizon
+                                      return country.code === "Minnesota";
                                     default:
-                                      return true; // Все локации доступны, если оператор не выбран
+                                      return true;
                                   }
                                 },
                               );
@@ -701,36 +697,6 @@ export const AddProxy: React.FC = () => {
                             </p>
                           )}
                       </Label>
-                      {/*<Label className="flex w-full gap-4 flex-col opacity-0 pointer-events-none h-0">*/}
-                      {/*  <span className="text-[#6F7279] text-sm uppercase leading-tight">*/}
-                      {/*    auto rotation*/}
-                      {/*  </span>*/}
-                      {/*  <div className="relative w-full flex items-center gap-2">*/}
-                      {/*    <Controller*/}
-                      {/*      control={control}*/}
-                      {/*      name="autoExtended"*/}
-                      {/*      rules={nameValidation}*/}
-                      {/*      render={({ field }) => (*/}
-                      {/*        // eslint-disable-next-line @typescript-eslint/ban-ts-comment*/}
-                      {/*        <input*/}
-                      {/*          type="checkbox"*/}
-                      {/*          {...field}*/}
-                      {/*          className="peer h-6 w-6 max-w-6 shrink-0 rounded-sm border-2 border-[#22293B] ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-custom-gradient-2 data-[state=checked]:text-primary-foreground max-mobile-2:ml-auto"*/}
-                      {/*          checked={Boolean(field.value)}*/}
-                      {/*          defaultChecked={true}*/}
-                      {/*          onChange={(*/}
-                      {/*            e: ChangeEvent<HTMLInputElement>,*/}
-                      {/*          ) => {*/}
-                      {/*            return field.onChange(e.target.checked);*/}
-                      {/*          }}*/}
-                      {/*        />*/}
-                      {/*      )}*/}
-                      {/*    />*/}
-                      {/*    <span className="text-[#F7F7F7] text-sm leading-tight">*/}
-                      {/*      Enable auto rotation*/}
-                      {/*    </span>*/}
-                      {/*  </div>*/}
-                      {/*</Label>*/}
                     </div>
                   </div>
                   <div className="w-full max-w-[423px] flex-col justify-start items-start gap-6 flex max-1024:max-w-full max-mobile-2:max-w-full">
@@ -904,18 +870,6 @@ export const AddProxy: React.FC = () => {
                                 </div>
                               </Label>
                               <div className="w-full h-px bg-custom-gradient-5 rounded-[3px]" />
-                              {/* <Label className="w-full h-full justify-start items-center gap-5 flex">
-                                <RadioGroupItem
-                                  className="min-w-6"
-                                  value="Crypto"
-                                />
-                                <div className="w-full justify-between items-center flex">
-                                  <div className="text-[#C2C6D1]">Crypto</div>
-                                  <div className="w-[52px] h-[26px] rounded-md border border-[#22293B] flex justify-center items-center">
-                                    <Crypto2Icon className="w-[18px] h-[18px]" />
-                                  </div>
-                                </div>
-                              </Label> */}
                               <div className="w-full h-px bg-custom-gradient-5 rounded-[3px]" />
                               <Label className="w-full h-full justify-start items-center gap-5 flex">
                                 <RadioGroupItem
@@ -1002,14 +956,6 @@ export const AddProxy: React.FC = () => {
                                   {selectedDuration}
                                 </div>
                               </div>
-                              {/*<div className="flex-col justify-start items-start gap-2 flex">*/}
-                              {/*  <div className="text-[#6F7279] text-xs uppercase leading-none">*/}
-                              {/*    auto-extended*/}
-                              {/*  </div>*/}
-                              {/*  <div className="text-[#C2C6D1] text-sm leading-tight">*/}
-                              {/*    Yes*/}
-                              {/*  </div>*/}
-                              {/*</div>*/}
                             </div>
                             <div className="w-full h-px bg-custom-gradient-5 rounded-[3px]" />
                             <div className="w-full justify-between items-start flex">
