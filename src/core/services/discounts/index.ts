@@ -33,7 +33,7 @@ export const discountApply = async (
   token: string,
 ): Promise<discountListItem | string> => {
   const response = await axios.get(
-    `${API_BASE_URL}/discount/apply?code=${code}`,
+    `${API_BASE_URL}/discounts/apply?code=${code}`,
     {
       headers: {
         Accept: "application/json",
