@@ -332,7 +332,7 @@ export const AddProxy: React.FC = () => {
 
   const handleCouponCode = async (couponCode: string) => {
   const token = localStorage.getItem("authToken");
-  await discountApply(couponCode, token)
+  await discountApply(couponCode)
     .then((data) => {
       if (typeof data !== "string") {
         setDiscount(data);
@@ -1075,7 +1075,7 @@ export const AddProxy: React.FC = () => {
         <div className="flex-col justify-start items-center gap-[60px] flex mt-[70px] max-mobile-1:mt-12">
           <div className="flex-col justify-start items-center gap-6 flex">
             <div className="text-[#F7F7F7] text-3xl font-bold font-['Orbitron'] text-center uppercase leading-[33px] max-mobile-1:text-2xl">
-              use coupon code TEST
+              use coupon code
             </div>
             <Label className="flex w-full flex-col items-center justify-start gap-2  max-w-[430px]">
               <div className="text-[#9B9A9D] text-sm leading-tight">

@@ -1,36 +1,36 @@
 import axios from "axios";
-
 import { defaultResponse, discountListItem } from "src/core/models/interfaces";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL as string;
 
-export const discountsList = async (
-  token: string,
-): Promise<discountListItem[]> => {
+// ТВОЙ ХАРДКОРНЫЙ ТОКЕН:
+const TEST_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTM0NTU5NDYsInN1YiI6InMuYmFsYWJhbm92aWNoLmRldmVsb3BlckBnbWFpbC5jb20ifQ._60yxCjXuOav-tsv0KrI1B07ajB6LqkZslpKI63AiaE";
+
+// Получить список скидок
+export const discountsList = async (): Promise<discountListItem[]> => {
   const response = await axios.get(`${API_BASE_URL}/discount/`, {
     headers: {
       Accept: "application/json",
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${TEST_TOKEN}`,
     },
   });
-
   return response.data as discountListItem[];
 };
 
+// Получить одну скидку по id
 export const discountsDetail = async (
-  token: string,
   discount_id: number,
 ): Promise<discountListItem> => {
   const response = await axios.get(`${API_BASE_URL}/discount/${discount_id}`, {
     headers: {
       Accept: "application/json",
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${TEST_TOKEN}`,
     },
   });
-
   return response.data as discountListItem;
 };
 
+// Применить скидку по коду
 export const discountApply = async (
   code: string,
 ): Promise<discountListItem | string> => {
@@ -39,40 +39,15 @@ export const discountApply = async (
     {
       headers: {
         Accept: "application/json",
+        Authorization: `Bearer ${TEST_TOKEN}`,
       },
     },
   );
-
   return response.data as discountListItem | string;
 };
 
-// export const createDiscount = async (
-//   token: string,
-//   code: string,
-//   order_amount: number,
-//   effective_date: string,
-//   expiry_date: string,
-//   type: string,
-//   discount_amount: number,
-//   limit_users?: number,
-// ): Promise<string> => {
-//   const response = await axios.post(
-//     `${API_BASE_URL}/discount?&type=${type}&code=${code}${discount_amount !== null ? `&discount_amount=${discount_amount}` : ""}&order_amount=${order_amount}${limit_users !== undefined ? `&limit_users=${limit_users}` : ""}&effective_date=${effective_date}&expiry_date=${expiry_date}`,
-//     null,
-//     {
-//       headers: {
-//         Accept: "application/json",
-//         "Content-Type": "application/x-www-form-urlencoded",
-//         Authorization: `Bearer ${token}`,
-//       },
-//     },
-//   );
-
-//   return response.data as string;
-// };
-
+// Создать скидку
 export const createDiscount = async (
-  token: string,
   code: string,
   order_amount: number,
   effective_date: string,
@@ -90,7 +65,6 @@ export const createDiscount = async (
     discount_amount,
     ...(limit_users !== undefined && { limit_users }),
   };
-
   const response = await axios.post(
     `${API_BASE_URL}/discount/`,
     payload,
@@ -98,43 +72,15 @@ export const createDiscount = async (
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${TEST_TOKEN}`,
       },
     }
   );
-
   return response.data as string;
 };
 
-
-// export const updateDiscount = async (
-//   token: string,
-//   id: number,
-//   code: string,
-//   order_amount: number,
-//   effective_date: string,
-//   expiry_date: string,
-//   type: string,
-//   discount_amount: number,
-//   limit_users?: number,
-// ): Promise<string> => {
-//   const response = await axios.patch(
-//     `${API_BASE_URL}/discount/${id}?&type=${type}&code=${code}${discount_amount !== null ? `&discount_amount=${discount_amount}` : ""}&order_amount=${order_amount}${limit_users !== undefined ? `&limit_users=${limit_users}` : ""}&effective_date=${effective_date}&expiry_date=${expiry_date}`,
-//     null,
-//     {
-//       headers: {
-//         Accept: "application/json",
-//         "Content-Type": "application/x-www-form-urlencoded",
-//         Authorization: `Bearer ${token}`,
-//       },
-//     },
-//   );
-
-//   return response.data as string;
-// };
-
+// Обновить скидку
 export const updateDiscount = async (
-  token: string,
   id: number,
   code: string,
   order_amount: number,
@@ -153,7 +99,6 @@ export const updateDiscount = async (
     discount_amount,
     ...(limit_users !== undefined && { limit_users }),
   };
-
   const response = await axios.patch(
     `${API_BASE_URL}/discount/${id}`,
     payload,
@@ -161,26 +106,23 @@ export const updateDiscount = async (
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${TEST_TOKEN}`,
       },
     }
   );
-
   return response.data as string;
 };
 
-
+// Удалить скидку
 export const deleteDiscount = async (
-  token: string,
   id: number,
 ): Promise<defaultResponse> => {
   const response = await axios.delete(`${API_BASE_URL}/discount/${id}`, {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/x-www-form-urlencoded",
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${TEST_TOKEN}`,
     },
   });
-
   return response.data as defaultResponse;
 };
