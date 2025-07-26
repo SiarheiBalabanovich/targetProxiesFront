@@ -6,7 +6,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL as string;
 export const discountsList = async (
   token: string,
 ): Promise<discountListItem[]> => {
-  const response = await axios.get(`${API_BASE_URL}/discount/`, {
+  const response = await axios.get(`${API_BASE_URL}/admin/discount/`, {
     headers: {
       Accept: "application/json",
       Authorization: `Bearer ${token}`,
@@ -19,7 +19,7 @@ export const discountsDetail = async (
   token: string,
   discount_id: number,
 ): Promise<discountListItem> => {
-  const response = await axios.get(`${API_BASE_URL}/discount/${discount_id}`, {
+  const response = await axios.get(`${API_BASE_URL}/admin/discount/${discount_id}`, {
     headers: {
       Accept: "application/json",
       Authorization: `Bearer ${token}`,
@@ -64,7 +64,7 @@ export const createDiscount = async (
     ...(limit_users !== undefined && { limit_users }),
   };
   const response = await axios.post(
-    `${API_BASE_URL}/discount/`,
+    `${API_BASE_URL}/admin/discount/`,
     payload,
     {
       headers: {
@@ -98,7 +98,7 @@ export const updateDiscount = async (
     ...(limit_users !== undefined && { limit_users }),
   };
   const response = await axios.patch(
-    `${API_BASE_URL}/discount/${id}`,
+    `${API_BASE_URL}/admin/discount/${id}`,
     payload,
     {
       headers: {
@@ -115,7 +115,7 @@ export const deleteDiscount = async (
   token: string,
   id: number,
 ): Promise<defaultResponse> => {
-  const response = await axios.delete(`${API_BASE_URL}/discount/${id}`, {
+  const response = await axios.delete(`${API_BASE_URL}/admin/discount/${id}`, {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/x-www-form-urlencoded",
