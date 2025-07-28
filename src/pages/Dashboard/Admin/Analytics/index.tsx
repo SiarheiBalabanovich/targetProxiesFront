@@ -269,7 +269,7 @@ const AdminAnalytics: React.FC = () => {
     <div className="flex min-h-lvh bg-[#0E0E16]">
       <Sidebar activeMenu={6} admin={true} />
       <div className="w-full pt-[27px] pb-[110px] px-5 flex flex-col gap-[40px] lg:px-10 xl:px-12 2xl:px-14 overflow-x-hidden">
-        <Header title="An'alytics" admin={true} />
+        <Header title="Analytics" admin={true} />
         <div className="max-w-[1416px] w-full grid grid-cols-3 gap-6 max-1200:grid-cols-2 max-mobile-1:grid-cols-1">
           {isLoading ? (
             <>
