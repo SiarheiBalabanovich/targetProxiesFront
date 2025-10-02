@@ -30,14 +30,12 @@ export const discountsDetail = async (
 
 export const discountApply = async (
   code: string,
-  token: string,
 ): Promise<discountListItem | string> => {
   const response = await axios.get(
     `${API_BASE_URL}/discount/apply?code=${code}`,
     {
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer ${token}`,
       },
     },
   );
