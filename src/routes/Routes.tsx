@@ -9,6 +9,7 @@ import LoginPage from "src/pages/Auth/Login";
 import RegisterPage from "src/pages/Auth/Registration";
 import NewPassword from "src/pages/Auth/NewPassword";
 import ResetPassword from "src/pages/Auth/ResetPassword";
+import SuccessfulPayment from "src/pages/SuccessfulPayment";
 
 import Dashboard from "src/pages/Dashboard/Customer";
 import ClientOverview from "src/pages/Dashboard/Customer/Overview";
@@ -210,6 +211,12 @@ export const routes = [
       },
     ],
   },
+  {
+  path: "/successful-payment",
+  key: "successfulPayment",
+  label: "Successful Payment Page",
+  element: <SuccessfulPayment />,
+},
   {
     path: "/",
     key: "homePage",

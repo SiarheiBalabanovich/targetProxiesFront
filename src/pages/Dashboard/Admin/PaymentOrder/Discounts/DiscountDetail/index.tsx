@@ -121,7 +121,7 @@ const AdminDiscountDetail: React.FC = () => {
         console.log("Error creating discount:", error);
         const axiosError = error as AxiosError;
         const errorData = axiosError.response?.data as ErrorResponse; // Type assertion here
-        if (errorData && errorData.detail.includes("Сбой целостности данных")) {
+        if (errorData && errorData.detail.includes("Data integrity violation")) {
           setError(
             "The name of the discount is already in use. Please select a different name.",
           );
@@ -453,14 +453,6 @@ const AdminDiscountDetail: React.FC = () => {
                     </span>
                   </div>
                   <Button
-                    disabled={
-                      !watch("code") ||
-                      !watch("order_amount") ||
-                      !watch("effective_date") ||
-                      !watch("expiry_date") ||
-                      !watch("discount_amount") ||
-                      (isLimited && !watch("limit_users"))
-                    }
                     type="submit"
                   >
                     Save
